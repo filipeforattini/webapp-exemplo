@@ -11,9 +11,18 @@
 |
 */
 
+Route::get('/', function(){ return 'Home'; });
+
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/produtos', 		'ProdutosController@index');
-Route::get('/fabricantes/{id}', 'FabricantesController@show');
+Route::group(['middleware' => 'auth'], function () {
+
+	Route::get('/produtos', 		'ProdutosController@index');
+
+	Route::get('/fabricantes/{id}', 		'FabricantesController@show');
+	Route::get('/fabricantes/{id}/edit', 	'FabricantesController@edit');
+	Route::post('/fabricantes/{id}', 		'FabricantesController@update');
+
+});

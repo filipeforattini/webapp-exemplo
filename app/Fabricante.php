@@ -10,4 +10,8 @@ class Fabricante extends Model
     {
     	return $this->hasMany('App\Produto');
     }
+    public function user()
+    {
+    	return $this->morphMany('App\User');
+    }
 }
